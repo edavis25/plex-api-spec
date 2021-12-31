@@ -1,0 +1,236 @@
+openapi: 3.1.0
+info:
+  title: Plex API
+  version: '1.0'
+  summary: API endpoints used by the Plex web player.
+  description: ''
+servers:
+  - url: 'http://192.168.50.203:32400'
+paths:
+  '/users/{userId}':
+    parameters:
+      - schema:
+          type: integer
+        name: userId
+        in: path
+        required: true
+        description: Id of an existing user.
+    get:
+      summary: Get User Info by User ID
+      tags: []
+      responses:
+        '200':
+          description: User Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                Get User Alice Smith:
+                  value:
+                    id: 142
+                    firstName: Alice
+                    lastName: Smith
+                    email: alice.smith@gmail.com
+                    dateOfBirth: '1997-10-31'
+                    emailVerified: true
+                    signUpDate: '2019-08-24'
+        '404':
+          description: User Not Found
+      operationId: get-users-userId
+      description: Retrieve the information of the user with the matching user ID.
+    patch:
+      summary: Update User Information
+      operationId: patch-users-userId
+      responses:
+        '200':
+          description: User Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                Updated User Rebecca Baker:
+                  value:
+                    id: 13
+                    firstName: Rebecca
+                    lastName: Baker
+                    email: rebecca@gmail.com
+                    dateOfBirth: '1985-10-02'
+                    emailVerified: false
+                    createDate: '2019-08-24'
+        '404':
+          description: User Not Found
+        '409':
+          description: Email Already Taken
+      description: Update the information of an existing user.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                email:
+                  type: string
+                  description: 'If a new email is given, the user''s email verified property will be set to false.'
+                dateOfBirth:
+                  type: string
+            examples:
+              Update First Name:
+                value:
+                  firstName: Rebecca
+              Update Email:
+                value:
+                  email: rebecca@gmail.com
+              Update Last Name & Date of Birth:
+                value:
+                  lastName: Baker
+                  dateOfBirth: '1985-10-02'
+        description: Patch user properties to update.
+  /user:
+    post:
+      summary: Create New User
+      operationId: post-user
+      responses:
+        '200':
+          description: User Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                New User Bob Fellow:
+                  value:
+                    id: 12
+                    firstName: Bob
+                    lastName: Fellow
+                    email: bob.fellow@gmail.com
+                    dateOfBirth: '1996-08-24'
+                    emailVerified: false
+                    createDate: '2020-11-18'
+        '400':
+          description: Missing Required Information
+        '409':
+          description: Email Already Taken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                email:
+                  type: string
+                dateOfBirth:
+                  type: string
+                  format: date
+              required:
+                - firstName
+                - lastName
+                - email
+                - dateOfBirth
+            examples:
+              Create User Bob Fellow:
+                value:
+                  firstName: Bob
+                  lastName: Fellow
+                  email: bob.fellow@gmail.com
+                  dateOfBirth: '1996-08-24'
+        description: Post the necessary fields for the API to create a new user.
+      description: Create a new user.
+  /servers:
+    get:
+      summary: List Servers
+      tags: []
+      operationId: get-servers
+      parameters:
+        - $ref: '#/components/parameters/Accept'
+      description: Retrieve a list of servers available to the authenticated user.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  MediaContainer:
+                    type: object
+                    required:
+                      - size
+                      - Server
+                    properties:
+                      size:
+                        type: integer
+                      Server:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Server'
+                required:
+                  - MediaContainer
+    parameters: []
+components:
+  schemas:
+    Server:
+      description: ''
+      type: object
+      x-examples:
+        example-1:
+          name: HTPC-Ubuntu
+          host: 192.168.50.203
+          address: 192.168.50.203
+          port: 32400
+          machineIdentifier: 6d95bd98160bb619a05e1a375a6076f21cf1c49d
+          version: 1.24.1.4931-1a38e63c6
+      properties:
+        name:
+          type: string
+        host:
+          type: string
+        address:
+          type: string
+        port:
+          type: integer
+        machineIdentifier:
+          type: string
+        version:
+          type: string
+      required:
+        - name
+        - host
+        - address
+        - port
+        - machineIdentifier
+        - version
+      examples:
+        - name: PlexServer-PC
+          host: 127.0.0.1
+          address: 127.0.0.1
+          port: 0
+          machineIdentifier: string
+          version: string
+  securitySchemes:
+    API Key - 1:
+      name: X-Plex-Token
+      type: apiKey
+      in: query
+  parameters:
+    Accept:
+      name: Accept
+      in: header
+      required: false
+      schema:
+        enum:
+          - application/xml
+          - application/json
+        type: string
+        default: application/xml
+security:
+  - API Key - 1: []
