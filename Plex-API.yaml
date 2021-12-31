@@ -175,6 +175,30 @@ paths:
                           $ref: '#/components/schemas/Server'
                 required:
                   - MediaContainer
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  MediaContainer:
+                    type: object
+                    required:
+                      - size
+                      - Server
+                    properties:
+                      size:
+                        type: integer
+                      Server:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Server'
+                required:
+                  - MediaContainer
+              examples:
+                Example:
+                  value: |-
+                    <MediaContainer size="1">
+                        <Server name="PlexServer-PC" host="127.0.0.1" address="127.0.0.1" port="32400" machineIdentifier="6d55bd9816sgb319a05e1a37aa607gf21cv1cb9c" version="1.24.1.4931-1a38e63c6"/>
+                    </MediaContainer>
     parameters: []
 components:
   schemas:
