@@ -10,7 +10,6 @@ paths:
   /servers:
     get:
       summary: List Servers
-      tags: []
       operationId: get-servers
       parameters:
         - $ref: '#/components/parameters/Accept'
@@ -61,7 +60,871 @@ paths:
                     <MediaContainer size="1">
                         <Server name="PlexServer-PC" host="127.0.0.1" address="127.0.0.1" port="32400" machineIdentifier="6d55bd9816sgb319a05e1a37aa607gf21cv1cb9c" version="1.24.1.4931-1a38e63c6"/>
                     </MediaContainer>
+      tags:
+        - server
     parameters: []
+  /library/sections:
+    get:
+      summary: List Libraries
+      tags:
+        - library
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    MediaContainer:
+                      size: 5
+                      allowSync: false
+                      identifier: com.plexapp.plugins.library
+                      mediaTagPrefix: /system/bundle/media/flags/
+                      mediaTagVersion: 1628745015
+                      title1: Plex Library
+                      Directory:
+                        - allowSync: true
+                          art: '/:/resources/movie-fanart.jpg'
+                          composite: /library/sections/2/composite/1639283674
+                          filters: true
+                          refreshing: false
+                          thumb: '/:/resources/movie.png'
+                          key: '2'
+                          type: movie
+                          title: Movies
+                          agent: tv.plex.agents.movie
+                          scanner: Plex Movie
+                          language: en-US
+                          uuid: 36e5c7d4-a5eb-47d8-be46-8f8fdb3085c3
+                          updatedAt: 1633394926
+                          createdAt: 1514529645
+                          scannedAt: 1639283674
+                          content: true
+                          directory: true
+                          contentChangedAt: 16952927
+                          hidden: 0
+                          Location:
+                            - id: 8
+                              path: /media/WD-3TB_WD-WMC4N2012336/Movies
+                        - allowSync: true
+                          art: '/:/resources/show-fanart.jpg'
+                          composite: /library/sections/6/composite/1633395029
+                          filters: true
+                          refreshing: false
+                          thumb: '/:/resources/show.png'
+                          key: '6'
+                          type: show
+                          title: TV Shows
+                          agent: com.plexapp.agents.thetvdb
+                          scanner: Plex Series Scanner
+                          language: en
+                          uuid: 282d121d-8150-4aff-87d1-2fe4b4dadb2a
+                          updatedAt: 1630512819
+                          createdAt: 1518668679
+                          scannedAt: 1633395029
+                          content: true
+                          directory: true
+                          contentChangedAt: 17459028
+                          hidden: 0
+                          Location:
+                            - id: 10
+                              path: /media/SG-1.5TB_6XW0CZV8/TV
+                        - allowSync: true
+                          art: '/:/resources/artist-fanart.jpg'
+                          composite: /library/sections/4/composite/1633395000
+                          filters: true
+                          refreshing: false
+                          thumb: '/:/resources/artist.png'
+                          key: '4'
+                          type: artist
+                          title: Music
+                          agent: com.plexapp.agents.lastfm
+                          scanner: Plex Music Scanner
+                          language: en
+                          uuid: 0e53e589-6fd4-4310-9bb9-41aa9b71e242
+                          updatedAt: 1630508768
+                          createdAt: 1514529721
+                          scannedAt: 1633395000
+                          content: true
+                          directory: true
+                          contentChangedAt: 12380883
+                          hidden: 0
+                          Location:
+                            - id: 9
+                              path: /media/SG-1.5TB_6XW0CZV8/Music
+                        - allowSync: true
+                          art: '/:/resources/movie-fanart.jpg'
+                          composite: /library/sections/7/composite/1633395024
+                          filters: true
+                          refreshing: false
+                          thumb: '/:/resources/video.png'
+                          key: '7'
+                          type: movie
+                          title: Music Videos
+                          agent: com.plexapp.agents.none
+                          scanner: Plex Video Files Scanner
+                          language: xn
+                          uuid: 05850bb2-ed51-486e-a1f0-b8c984ae377a
+                          updatedAt: 1538762173
+                          createdAt: 1538762173
+                          scannedAt: 1633395024
+                          content: true
+                          directory: true
+                          contentChangedAt: 0
+                          hidden: 0
+                          Location:
+                            - id: 7
+                              path: /home/eric/Videos/Music Videos
+                        - allowSync: true
+                          art: '/:/resources/movie-fanart.jpg'
+                          composite: /library/sections/5/composite/1633395025
+                          filters: true
+                          refreshing: false
+                          thumb: '/:/resources/video.png'
+                          key: '5'
+                          type: movie
+                          title: Stand-up
+                          agent: com.plexapp.agents.none
+                          scanner: Plex Video Files Scanner
+                          language: xn
+                          uuid: d1884abc-fe35-48e7-8350-acdc899cef60
+                          updatedAt: 1514529771
+                          createdAt: 1514529771
+                          scannedAt: 1633395025
+                          content: true
+                          directory: true
+                          contentChangedAt: 0
+                          hidden: 0
+                          Location:
+                            - id: 5
+                              path: /home/eric/Videos/Stand-up
+                properties:
+                  MediaContainer:
+                    type: object
+                    required:
+                      - size
+                      - allowSync
+                      - identifier
+                      - mediaTagPrefix
+                      - mediaTagVersion
+                      - title1
+                      - Directory
+                    properties:
+                      size:
+                        type: integer
+                      allowSync:
+                        type: boolean
+                      identifier:
+                        type: string
+                        minLength: 1
+                      mediaTagPrefix:
+                        type: string
+                        minLength: 1
+                      mediaTagVersion:
+                        type: number
+                      title1:
+                        type: string
+                        minLength: 1
+                      Directory:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        items:
+                          type: object
+                          properties:
+                            allowSync:
+                              type: boolean
+                            art:
+                              type: string
+                            composite:
+                              type: string
+                            refreshing:
+                              type: boolean
+                            filters:
+                              type: boolean
+                            thumb:
+                              type: string
+                            key:
+                              type: string
+                              description: The individual library's ID.
+                            type:
+                              type: string
+                            title:
+                              type: string
+                            agent:
+                              type: string
+                              minLength: 1
+                            scanner:
+                              type: string
+                            language:
+                              type: string
+                            uuid:
+                              type: string
+                            updatedAt:
+                              type: integer
+                            createdAt:
+                              type: integer
+                            scannedAt:
+                              type: integer
+                            content:
+                              type: boolean
+                            contentChangedAt:
+                              type: number
+                            directory:
+                              type: boolean
+                            hidden:
+                              type: number
+                            Location:
+                              type: array
+                              uniqueItems: true
+                              minItems: 1
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: integer
+                                  path:
+                                    type: string
+                                    description: Full system path to library's content (e.g. /home/Videos/movies).
+                                required:
+                                  - id
+                                  - path
+                          required:
+                            - allowSync
+                            - art
+                            - composite
+                            - refreshing
+                            - filters
+                            - thumb
+                            - key
+                            - type
+                            - title
+                            - agent
+                            - scanner
+                            - language
+                            - uuid
+                            - updatedAt
+                            - createdAt
+                            - scannedAt
+                            - content
+                            - contentChangedAt
+                            - directory
+                            - hidden
+                required:
+                  - MediaContainer
+              examples:
+                JSON Response:
+                  value:
+                    MediaContainer:
+                      size: 2
+                      allowSync: false
+                      identifier: com.plexapp.plugins.library
+                      mediaTagPrefix: /system/bundle/media/flags/
+                      mediaTagVersion: 1628745015
+                      title1: Plex Library
+                      Directory:
+                        - allowSync: true
+                          art: '/:/resources/movie-fanart.jpg'
+                          composite: /library/sections/2/composite/1639283674
+                          filters: true
+                          refreshing: false
+                          thumb: '/:/resources/movie.png'
+                          key: '2'
+                          type: movie
+                          title: Movies
+                          agent: tv.plex.agents.movie
+                          scanner: Plex Movie
+                          language: en-US
+                          uuid: 36e5c7d4-a5eb-47d8-be46-8f8fdb3085c3
+                          updatedAt: 1633394926
+                          createdAt: 1514529645
+                          scannedAt: 1639283674
+                          content: true
+                          directory: true
+                          contentChangedAt: 16952927
+                          hidden: 0
+                          Location:
+                            - id: 8
+                              path: /home/eric/Videos/Movies
+                        - allowSync: true
+                          art: '/:/resources/artist-fanart.jpg'
+                          composite: /library/sections/4/composite/1633395000
+                          filters: true
+                          refreshing: false
+                          thumb: '/:/resources/artist.png'
+                          key: '4'
+                          type: artist
+                          title: Music
+                          agent: com.plexapp.agents.lastfm
+                          scanner: Plex Music Scanner
+                          language: en
+                          uuid: 0e53e589-6fd4-4310-9bb9-41aa9b71e242
+                          updatedAt: 1630508768
+                          createdAt: 1514529721
+                          scannedAt: 1633395000
+                          content: true
+                          directory: true
+                          contentChangedAt: 12380883
+                          hidden: 0
+                          Location:
+                            - id: 9
+                              path: /home/eric/Music
+            application/xml:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    MediaContainer:
+                      size: 5
+                      allowSync: false
+                      identifier: com.plexapp.plugins.library
+                      mediaTagPrefix: /system/bundle/media/flags/
+                      mediaTagVersion: 1628745015
+                      title1: Plex Library
+                      Directory:
+                        - allowSync: true
+                          art: '/:/resources/movie-fanart.jpg'
+                          composite: /library/sections/2/composite/1639283674
+                          filters: true
+                          refreshing: false
+                          thumb: '/:/resources/movie.png'
+                          key: '2'
+                          type: movie
+                          title: Movies
+                          agent: tv.plex.agents.movie
+                          scanner: Plex Movie
+                          language: en-US
+                          uuid: 36e5c7d4-a5eb-47d8-be46-8f8fdb3085c3
+                          updatedAt: 1633394926
+                          createdAt: 1514529645
+                          scannedAt: 1639283674
+                          content: true
+                          directory: true
+                          contentChangedAt: 16952927
+                          hidden: 0
+                          Location:
+                            - id: 8
+                              path: /home/eric/Videos/Movies
+                        - allowSync: true
+                          art: '/:/resources/artist-fanart.jpg'
+                          composite: /library/sections/4/composite/1633395000
+                          filters: true
+                          refreshing: false
+                          thumb: '/:/resources/artist.png'
+                          key: '4'
+                          type: artist
+                          title: Music
+                          agent: com.plexapp.agents.lastfm
+                          scanner: Plex Music Scanner
+                          language: en
+                          uuid: 0e53e589-6fd4-4310-9bb9-41aa9b71e242
+                          updatedAt: 1630508768
+                          createdAt: 1514529721
+                          scannedAt: 1633395000
+                          content: true
+                          directory: true
+                          contentChangedAt: 12380883
+                          hidden: 0
+                          Location:
+                            - id: 9
+                              path: /home/eric/Music
+                properties:
+                  MediaContainer:
+                    type: object
+                    required:
+                      - size
+                      - allowSync
+                      - identifier
+                      - mediaTagPrefix
+                      - mediaTagVersion
+                      - title1
+                      - Directory
+                    properties:
+                      size:
+                        type: integer
+                      allowSync:
+                        type: boolean
+                      identifier:
+                        type: string
+                      mediaTagPrefix:
+                        type: string
+                      mediaTagVersion:
+                        type: number
+                      title1:
+                        type: string
+                      Directory:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        items:
+                          type: object
+                          properties:
+                            allowSync:
+                              type: boolean
+                            art:
+                              type: string
+                              minLength: 1
+                            composite:
+                              type: string
+                              minLength: 1
+                            filters:
+                              type: boolean
+                            refreshing:
+                              type: boolean
+                            thumb:
+                              type: string
+                              minLength: 1
+                            key:
+                              type: string
+                              minLength: 1
+                              description: The individual library's ID.
+                            type:
+                              type: string
+                              minLength: 1
+                            title:
+                              type: string
+                              minLength: 1
+                            agent:
+                              type: string
+                              minLength: 1
+                            scanner:
+                              type: string
+                              minLength: 1
+                            language:
+                              type: string
+                              minLength: 1
+                            uuid:
+                              type: string
+                              minLength: 1
+                            updatedAt:
+                              type: integer
+                            createdAt:
+                              type: integer
+                            scannedAt:
+                              type: integer
+                            content:
+                              type: boolean
+                            directory:
+                              type: boolean
+                            contentChangedAt:
+                              type: number
+                            hidden:
+                              type: integer
+                            Location:
+                              type: array
+                              uniqueItems: true
+                              minItems: 1
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: number
+                                  path:
+                                    type: string
+                                    description: Full system path to library's content (e.g. /home/Videos/movies).
+                                required:
+                                  - id
+                                  - path
+                          required:
+                            - allowSync
+                            - art
+                            - composite
+                            - filters
+                            - refreshing
+                            - thumb
+                            - key
+                            - type
+                            - title
+                            - agent
+                            - scanner
+                            - language
+                            - uuid
+                            - updatedAt
+                            - createdAt
+                            - scannedAt
+                            - content
+                            - directory
+                            - contentChangedAt
+                            - hidden
+                required:
+                  - MediaContainer
+              examples:
+                XML Response:
+                  value: |-
+                    <MediaContainer size="2" allowSync="0" identifier="com.plexapp.plugins.library" mediaTagPrefix="/system/bundle/media/flags/" mediaTagVersion="1628745015" title1="Plex Library">
+                        <Directory allowSync="1" art="/:/resources/movie-fanart.jpg" composite="/library/sections/2/composite/1639283674" filters="1" refreshing="0" thumb="/:/resources/movie.png" key="2" type="movie" title="Movies" agent="tv.plex.agents.movie" scanner="Plex Movie" language="en-US" uuid="36e5c7d4-a5eb-47d8-be46-8f8fdb3085c3" updatedAt="1633394926" createdAt="1514529645" scannedAt="1639283674" content="1" directory="1" contentChangedAt="16952927" hidden="0">
+                            <Location id="8" path="/home/eric/Videos/Movies"/>
+                        </Directory>
+                        <Directory allowSync="1" art="/:/resources/artist-fanart.jpg" composite="/library/sections/4/composite/1633395000" filters="1" refreshing="0" thumb="/:/resources/artist.png" key="4" type="artist" title="Music" agent="com.plexapp.agents.lastfm" scanner="Plex Music Scanner" language="en" uuid="0e53e589-6fd4-4310-9bb9-41aa9b71e242" updatedAt="1630508768" createdAt="1514529721" scannedAt="1633395000" content="1" directory="1" contentChangedAt="12380883" hidden="0">
+                            <Location id="9" path="/home/eric/Music"/>
+                        </Directory>
+                    </MediaContainer>
+      operationId: get-library-sections
+      description: 'Retrieve all of the libraries associated with the server (e.g. "Movies", "TV Shows", "Music").'
+      parameters:
+        - $ref: '#/components/parameters/Accept'
+  '/library/sections/{id}':
+    get:
+      summary: Retrieve Library
+      tags:
+        - library
+      operationId: get-library-sections
+      description: Retrieve a specific library (e.g. "Movies").
+      parameters:
+        - $ref: '#/components/parameters/Accept'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    MediaContainer:
+                      size: 19
+                      allowSync: false
+                      art: '/:/resources/movie-fanart.jpg'
+                      content: secondary
+                      identifier: com.plexapp.plugins.library
+                      librarySectionID: 2
+                      mediaTagPrefix: /system/bundle/media/flags/
+                      mediaTagVersion: 1628745015
+                      thumb: '/:/resources/movie.png'
+                      title1: Movies
+                      viewGroup: secondary
+                      viewMode: 65592
+                      Directory:
+                        - key: all
+                          title: All Movies
+                        - key: unwatched
+                          title: Unplayed
+                        - key: newest
+                          title: Recently Released
+                        - key: recentlyAdded
+                          title: Recently Added
+                        - key: recentlyViewed
+                          title: Recently Viewed
+                        - key: onDeck
+                          title: Continue Watching
+                        - secondary: true
+                          key: collection
+                          title: By Collection
+                        - secondary: true
+                          key: genre
+                          title: By Genre
+                        - secondary: true
+                          key: year
+                          title: By Year
+                        - secondary: true
+                          key: decade
+                          title: By Decade
+                        - secondary: true
+                          key: director
+                          title: By Director
+                        - secondary: true
+                          key: actor
+                          title: By Starring Actor
+                        - secondary: true
+                          key: country
+                          title: By Country
+                        - secondary: true
+                          key: contentRating
+                          title: By Content Rating
+                        - secondary: true
+                          key: rating
+                          title: By Rating
+                        - secondary: true
+                          key: resolution
+                          title: By Resolution
+                        - secondary: true
+                          key: firstCharacter
+                          title: By First Letter
+                        - key: folder
+                          title: By Folder
+                        - prompt: Search Movies
+                          search: true
+                          key: search?type=1
+                          title: Search...
+                properties:
+                  MediaContainer:
+                    type: object
+                    required:
+                      - size
+                      - allowSync
+                      - art
+                      - content
+                      - identifier
+                      - librarySectionID
+                      - mediaTagPrefix
+                      - mediaTagVersion
+                      - thumb
+                      - title1
+                      - viewGroup
+                      - viewMode
+                      - Directory
+                    properties:
+                      size:
+                        type: integer
+                      allowSync:
+                        type: boolean
+                      art:
+                        type: string
+                      content:
+                        type: string
+                      identifier:
+                        type: string
+                      librarySectionID:
+                        type: integer
+                      mediaTagPrefix:
+                        type: string
+                      mediaTagVersion:
+                        type: integer
+                      thumb:
+                        type: string
+                      title1:
+                        type: string
+                      viewGroup:
+                        type: string
+                      viewMode:
+                        type: integer
+                      Directory:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        items:
+                          type: object
+                          properties:
+                            key:
+                              type: string
+                            title:
+                              type: string
+                            prompt:
+                              type: string
+                            search:
+                              type: boolean
+                            secondary:
+                              type: boolean
+                          required:
+                            - key
+                            - title
+                required:
+                  - MediaContainer
+              examples:
+                JSON Response:
+                  value:
+                    MediaContainer:
+                      size: 19
+                      allowSync: false
+                      art: '/:/resources/movie-fanart.jpg'
+                      content: secondary
+                      identifier: com.plexapp.plugins.library
+                      librarySectionID: 2
+                      mediaTagPrefix: /system/bundle/media/flags/
+                      mediaTagVersion: 1628745015
+                      thumb: '/:/resources/movie.png'
+                      title1: Movies
+                      viewGroup: secondary
+                      viewMode: 65592
+                      Directory:
+                        - key: all
+                          title: All Movies
+                        - key: unwatched
+                          title: Unplayed
+                        - key: newest
+                          title: Recently Released
+                        - key: recentlyAdded
+                          title: Recently Added
+                        - key: recentlyViewed
+                          title: Recently Viewed
+                        - key: onDeck
+                          title: Continue Watching
+                        - secondary: true
+                          key: collection
+                          title: By Collection
+                        - secondary: true
+                          key: genre
+                          title: By Genre
+                        - secondary: true
+                          key: year
+                          title: By Year
+                        - secondary: true
+                          key: decade
+                          title: By Decade
+                        - secondary: true
+                          key: director
+                          title: By Director
+                        - secondary: true
+                          key: actor
+                          title: By Starring Actor
+                        - secondary: true
+                          key: country
+                          title: By Country
+                        - secondary: true
+                          key: contentRating
+                          title: By Content Rating
+                        - secondary: true
+                          key: rating
+                          title: By Rating
+                        - secondary: true
+                          key: resolution
+                          title: By Resolution
+                        - secondary: true
+                          key: firstCharacter
+                          title: By First Letter
+                        - key: folder
+                          title: By Folder
+                        - prompt: Search Movies
+                          search: true
+                          key: search?type=1
+                          title: Search...
+            application/xml:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    MediaContainer:
+                      size: 19
+                      allowSync: false
+                      art: '/:/resources/movie-fanart.jpg'
+                      content: secondary
+                      identifier: com.plexapp.plugins.library
+                      librarySectionID: 2
+                      mediaTagPrefix: /system/bundle/media/flags/
+                      mediaTagVersion: 1628745015
+                      thumb: '/:/resources/movie.png'
+                      title1: Movies
+                      viewGroup: secondary
+                      viewMode: 65592
+                      Directory:
+                        - key: all
+                          title: All Movies
+                        - key: unwatched
+                          title: Unplayed
+                        - key: newest
+                          title: Recently Released
+                        - key: recentlyAdded
+                          title: Recently Added
+                        - key: recentlyViewed
+                          title: Recently Viewed
+                        - key: onDeck
+                          title: Continue Watching
+                        - secondary: true
+                          key: collection
+                          title: By Collection
+                        - secondary: true
+                          key: genre
+                          title: By Genre
+                        - secondary: true
+                          key: year
+                          title: By Year
+                        - secondary: true
+                          key: decade
+                          title: By Decade
+                        - secondary: true
+                          key: director
+                          title: By Director
+                        - secondary: true
+                          key: actor
+                          title: By Starring Actor
+                        - secondary: true
+                          key: country
+                          title: By Country
+                        - secondary: true
+                          key: contentRating
+                          title: By Content Rating
+                        - secondary: true
+                          key: rating
+                          title: By Rating
+                        - secondary: true
+                          key: resolution
+                          title: By Resolution
+                        - secondary: true
+                          key: firstCharacter
+                          title: By First Letter
+                        - key: folder
+                          title: By Folder
+                        - prompt: Search Movies
+                          search: true
+                          key: search?type=1
+                          title: Search...
+                properties:
+                  MediaContainer:
+                    type: object
+                    required:
+                      - size
+                      - allowSync
+                      - art
+                      - content
+                      - identifier
+                      - librarySectionID
+                      - mediaTagPrefix
+                      - mediaTagVersion
+                      - thumb
+                      - title1
+                      - viewGroup
+                      - viewMode
+                      - Directory
+                    properties:
+                      size:
+                        type: integer
+                      allowSync:
+                        type: boolean
+                      art:
+                        type: string
+                      content:
+                        type: string
+                      identifier:
+                        type: string
+                      librarySectionID:
+                        type: integer
+                      mediaTagPrefix:
+                        type: string
+                      mediaTagVersion:
+                        type: integer
+                      thumb:
+                        type: string
+                      title1:
+                        type: string
+                      viewGroup:
+                        type: string
+                      viewMode:
+                        type: number
+                      Directory:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        items:
+                          type: object
+                          properties:
+                            key:
+                              type: string
+                            title:
+                              type: string
+                            secondary:
+                              type: boolean
+                            search:
+                              type: boolean
+                            prompt:
+                              type: string
+                          required:
+                            - key
+                            - title
+                required:
+                  - MediaContainer
+    parameters:
+      - schema:
+          type: integer
+        name: id
+        in: path
+        required: true
+        description: Library ID. Sometimes called "LibrarySectionID" or "key".
 components:
   schemas:
     Server:
