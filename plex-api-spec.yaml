@@ -1075,7 +1075,7 @@ paths:
   '/library/sections/{id}':
     get:
       summary: Retrieve Library
-      operationId: get-library-sections
+      operationId: get-library-section
       description: Retrieve a specific library (e.g. "Movies").
       parameters:
         - $ref: '#/components/parameters/Accept'
@@ -1454,7 +1454,7 @@ paths:
       responses:
         '200':
           description: OK
-      operationId: get-library-sections-section-ID-refresh
+      operationId: get-refresh-library-section
       description: Run refresh scan on a specific library.
     parameters:
       - $ref: '#/components/parameters/Library-ID'
