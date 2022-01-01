@@ -1443,7 +1443,8 @@ paths:
   '/:/prefs':
     get:
       summary: Retrieve Server Settings
-      tags: []
+      tags:
+        - Server
       responses:
         '200':
           description: OK
@@ -2852,8 +2853,7 @@ paths:
                             type:
                               type: string
                               example: bool
-                            default:
-                              type: number
+                            default: {}
                             value: {}
                             hidden:
                               type: boolean
@@ -2893,7 +2893,7 @@ paths:
                           group: general
                         - id: RadioDaysSinceLastPlayed
                           label: ''
-                          summary: example-1 ""
+                          summary: ''
                           type: int
                           default: 2
                           value: 2
@@ -2972,8 +2972,7 @@ paths:
                             type:
                               type: string
                               example: bool
-                            default:
-                              type: number
+                            default: {}
                             value: {}
                             hidden:
                               type: boolean
