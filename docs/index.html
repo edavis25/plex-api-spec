@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plex API Specification</title>
+    <!-- needed for adaptive design -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+
+    <!--
+    ReDoc doesn't change outer page styles
+    -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .menu-content {
+            /* this kinda matches logo background color */
+            background-color: #F7F7F7 !important;
+            width: 320px !important;
+
+        }
+    </style>
+</head>
+<body>
+<div id="redoc-container"></div>
+<script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"></script>
+<script>
+    window.addEventListener('load', () => {
+        const element = document.querySelector("#redoc-container");
+        const options = {
+            theme: {
+                logo: {
+                    gutter: 0
+                }
+            }
+        };
+        // todo update this URL
+        // also update the logo in the spec file once pushed to github
+        window.Redoc.init('https://raw.githubusercontent.com/edavis25/plex-api-spec/main/plex-api-spec.yaml', options, element);
+    });
+
+</script>
+</body>
+</html>
