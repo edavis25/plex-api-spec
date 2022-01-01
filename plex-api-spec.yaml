@@ -560,7 +560,10 @@ paths:
                         </Directory>
                     </MediaContainer>
       operationId: get-library-sections
-      description: 'Retrieve all of the libraries associated with the server (e.g. "Movies", "TV Shows", "Music").'
+      description: |-
+        Retrieve all of the libraries associated with the server (e.g. "Movies", "TV Shows", "Music").
+
+        Response to this endpoint is identical to /library/sections/all
       parameters:
         - $ref: '#/components/parameters/Accept'
   /library/sections/all:
@@ -1061,8 +1064,11 @@ paths:
                             <Location id="9" path="/home/eric/Music"/>
                         </Directory>
                     </MediaContainer>
-      operationId: get-library-sections
-      description: 'Retrieve all of the libraries associated with the server (e.g. "Movies", "TV Shows", "Music").'
+      operationId: get-all-library-sections
+      description: |-
+        Retrieve all of the libraries associated with the server (e.g. "Movies", "TV Shows", "Music").
+
+        Response to this endpoint is identical to `/library/sections/all`
       parameters:
         - $ref: '#/components/parameters/Accept'
     parameters: []
