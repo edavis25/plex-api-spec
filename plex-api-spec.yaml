@@ -60,6 +60,8 @@ paths:
                     <MediaContainer size="1">
                         <Server name="PlexServer-PC" host="127.0.0.1" address="127.0.0.1" port="32400" machineIdentifier="6d55bd9816sgb319a05e1a37aa607gf21cv1cb9c" version="1.24.1.4931-1a38e63c6"/>
                     </MediaContainer>
+      tags:
+        - Server
     parameters: []
   /library/sections:
     get:
@@ -215,19 +217,15 @@ paths:
                         type: boolean
                       identifier:
                         type: string
-                        minLength: 1
                       mediaTagPrefix:
                         type: string
-                        minLength: 1
                       mediaTagVersion:
                         type: number
                       title1:
                         type: string
-                        minLength: 1
                       Directory:
                         type: array
                         uniqueItems: true
-                        minItems: 1
                         items:
                           type: object
                           properties:
@@ -252,7 +250,6 @@ paths:
                               type: string
                             agent:
                               type: string
-                              minLength: 1
                             scanner:
                               type: string
                             language:
@@ -276,7 +273,6 @@ paths:
                             Location:
                               type: array
                               uniqueItems: true
-                              minItems: 1
                               items:
                                 type: object
                                 properties:
@@ -455,47 +451,37 @@ paths:
                       Directory:
                         type: array
                         uniqueItems: true
-                        minItems: 1
                         items:
                           type: object
+                          additionalProperties: false
                           properties:
                             allowSync:
                               type: boolean
                             art:
                               type: string
-                              minLength: 1
                             composite:
                               type: string
-                              minLength: 1
                             filters:
                               type: boolean
                             refreshing:
                               type: boolean
                             thumb:
                               type: string
-                              minLength: 1
                             key:
                               type: string
-                              minLength: 1
                               description: The individual library's ID.
                             type:
                               type: string
-                              minLength: 1
                             title:
                               type: string
-                              minLength: 1
                             agent:
                               type: string
-                              minLength: 1
                             scanner:
                               type: string
-                              minLength: 1
                             language:
                               type: string
-                              minLength: 1
                             uuid:
                               type: string
-                              minLength: 1
                             updatedAt:
                               type: integer
                             createdAt:
@@ -513,7 +499,6 @@ paths:
                             Location:
                               type: array
                               uniqueItems: true
-                              minItems: 1
                               items:
                                 type: object
                                 properties:
@@ -551,12 +536,22 @@ paths:
               examples:
                 XML Response:
                   value: |-
-                    <MediaContainer size="2" allowSync="0" identifier="com.plexapp.plugins.library" mediaTagPrefix="/system/bundle/media/flags/" mediaTagVersion="1628745015" title1="Plex Library">
-                        <Directory allowSync="1" art="/:/resources/movie-fanart.jpg" composite="/library/sections/2/composite/1639283674" filters="1" refreshing="0" thumb="/:/resources/movie.png" key="2" type="movie" title="Movies" agent="tv.plex.agents.movie" scanner="Plex Movie" language="en-US" uuid="36e5c7d4-a5eb-47d8-be46-8f8fdb3085c3" updatedAt="1633394926" createdAt="1514529645" scannedAt="1639283674" content="1" directory="1" contentChangedAt="16952927" hidden="0">
-                            <Location id="8" path="/home/eric/Videos/Movies"/>
+                    <?xml version="1.0" encoding="UTF-8"?>
+                    <MediaContainer size="5" allowSync="0" identifier="com.plexapp.plugins.library" mediaTagPrefix="/system/bundle/media/flags/" mediaTagVersion="1628745015" title1="Plex Library">
+                        <Directory allowSync="1" art="/:/resources/movie-fanart.jpg" composite="/library/sections/2/composite/1641008752" filters="1" refreshing="0" thumb="/:/resources/movie.png" key="2" type="movie" title="Movies" agent="tv.plex.agents.movie" scanner="Plex Movie" language="en-US" uuid="36e5c7d4-a5eb-47d8-be46-8f8fdb3085c3" updatedAt="1633394926" createdAt="1514529645" scannedAt="1641008752" content="1" directory="1" contentChangedAt="16952927" hidden="0">
+                            <Location id="8" path="/media/WD-3TB_WD-WMC4N2012336/Movies"/>
                         </Directory>
-                        <Directory allowSync="1" art="/:/resources/artist-fanart.jpg" composite="/library/sections/4/composite/1633395000" filters="1" refreshing="0" thumb="/:/resources/artist.png" key="4" type="artist" title="Music" agent="com.plexapp.agents.lastfm" scanner="Plex Music Scanner" language="en" uuid="0e53e589-6fd4-4310-9bb9-41aa9b71e242" updatedAt="1630508768" createdAt="1514529721" scannedAt="1633395000" content="1" directory="1" contentChangedAt="12380883" hidden="0">
-                            <Location id="9" path="/home/eric/Music"/>
+                        <Directory allowSync="1" art="/:/resources/show-fanart.jpg" composite="/library/sections/6/composite/1633395029" filters="1" refreshing="0" thumb="/:/resources/show.png" key="6" type="show" title="TV Shows" agent="com.plexapp.agents.thetvdb" scanner="Plex Series Scanner" language="en" uuid="282d121d-8150-4aff-87d1-2fe4b4dadb2a" updatedAt="1630512819" createdAt="1518668679" scannedAt="1633395029" content="1" directory="1" contentChangedAt="17459028" hidden="0">
+                            <Location id="10" path="/media/SG-1.5TB_6XW0CZV8/TV"/>
+                        </Directory>
+                        <Directory allowSync="1" art="/:/resources/artist-fanart.jpg" composite="/library/sections/4/composite/1641008762" filters="1" refreshing="0" thumb="/:/resources/artist.png" key="4" type="artist" title="Music" agent="com.plexapp.agents.lastfm" scanner="Plex Music Scanner" language="en" uuid="0e53e589-6fd4-4310-9bb9-41aa9b71e242" updatedAt="1630508768" createdAt="1514529721" scannedAt="1641008762" content="1" directory="1" contentChangedAt="12380883" hidden="0">
+                            <Location id="9" path="/media/SG-1.5TB_6XW0CZV8/Music"/>
+                        </Directory>
+                        <Directory allowSync="1" art="/:/resources/movie-fanart.jpg" composite="/library/sections/7/composite/1633395024" filters="1" refreshing="0" thumb="/:/resources/video.png" key="7" type="movie" title="Music Videos" agent="com.plexapp.agents.none" scanner="Plex Video Files Scanner" language="xn" uuid="05850bb2-ed51-486e-a1f0-b8c984ae377a" updatedAt="1538762173" createdAt="1538762173" scannedAt="1633395024" content="1" directory="1" contentChangedAt="0" hidden="0">
+                            <Location id="7" path="/home/eric/Videos/Music Videos"/>
+                        </Directory>
+                        <Directory allowSync="1" art="/:/resources/movie-fanart.jpg" composite="/library/sections/5/composite/1633395025" filters="1" refreshing="0" thumb="/:/resources/video.png" key="5" type="movie" title="Stand-up" agent="com.plexapp.agents.none" scanner="Plex Video Files Scanner" language="xn" uuid="d1884abc-fe35-48e7-8350-acdc899cef60" updatedAt="1514529771" createdAt="1514529771" scannedAt="1633395025" content="1" directory="1" contentChangedAt="0" hidden="0">
+                            <Location id="5" path="/home/eric/Videos/Stand-up"/>
                         </Directory>
                     </MediaContainer>
       operationId: get-library-sections
@@ -566,6 +561,8 @@ paths:
         Response to this endpoint is identical to /library/sections/all
       parameters:
         - $ref: '#/components/parameters/Accept'
+      tags:
+        - Libraries
   /library/sections/all:
     get:
       summary: List All Libraries
@@ -720,19 +717,15 @@ paths:
                         type: boolean
                       identifier:
                         type: string
-                        minLength: 1
                       mediaTagPrefix:
                         type: string
-                        minLength: 1
                       mediaTagVersion:
                         type: number
                       title1:
                         type: string
-                        minLength: 1
                       Directory:
                         type: array
                         uniqueItems: true
-                        minItems: 1
                         items:
                           type: object
                           properties:
@@ -757,7 +750,6 @@ paths:
                               type: string
                             agent:
                               type: string
-                              minLength: 1
                             scanner:
                               type: string
                             language:
@@ -781,7 +773,6 @@ paths:
                             Location:
                               type: array
                               uniqueItems: true
-                              minItems: 1
                               items:
                                 type: object
                                 properties:
@@ -960,7 +951,6 @@ paths:
                       Directory:
                         type: array
                         uniqueItems: true
-                        minItems: 1
                         items:
                           type: object
                           properties:
@@ -968,39 +958,29 @@ paths:
                               type: boolean
                             art:
                               type: string
-                              minLength: 1
                             composite:
                               type: string
-                              minLength: 1
                             filters:
                               type: boolean
                             refreshing:
                               type: boolean
                             thumb:
                               type: string
-                              minLength: 1
                             key:
                               type: string
-                              minLength: 1
                               description: The individual library's ID.
                             type:
                               type: string
-                              minLength: 1
                             title:
                               type: string
-                              minLength: 1
                             agent:
                               type: string
-                              minLength: 1
                             scanner:
                               type: string
-                              minLength: 1
                             language:
                               type: string
-                              minLength: 1
                             uuid:
                               type: string
-                              minLength: 1
                             updatedAt:
                               type: integer
                             createdAt:
@@ -1018,7 +998,6 @@ paths:
                             Location:
                               type: array
                               uniqueItems: true
-                              minItems: 1
                               items:
                                 type: object
                                 properties:
@@ -1071,6 +1050,8 @@ paths:
         Response to this endpoint is identical to `/library/sections/all`
       parameters:
         - $ref: '#/components/parameters/Accept'
+      tags:
+        - Libraries
     parameters: []
   '/library/sections/{id}':
     get:
@@ -1199,7 +1180,6 @@ paths:
                       Directory:
                         type: array
                         uniqueItems: true
-                        minItems: 1
                         items:
                           type: object
                           properties:
@@ -1402,7 +1382,6 @@ paths:
                       Directory:
                         type: array
                         uniqueItems: true
-                        minItems: 1
                         items:
                           type: object
                           properties:
@@ -1445,12 +1424,15 @@ paths:
                         <Directory key="folder" title="By Folder"/>
                         <Directory prompt="Search Movies" search="1" key="search?type=1" title="Search..."/>
                     </MediaContainer>
+      tags:
+        - Libraries
     parameters:
       - $ref: '#/components/parameters/Library-ID'
   '/library/sections/{id}/refresh':
     get:
       summary: Your GET endpoint
-      tags: []
+      tags:
+        - Libraries
       responses:
         '200':
           description: OK
@@ -1515,7 +1497,7 @@ components:
         type: string
         default: application/xml
     Library-ID:
-      name: Library ID
+      name: id
       in: path
       required: true
       schema:
